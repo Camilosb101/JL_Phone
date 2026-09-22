@@ -4,12 +4,18 @@ import { products } from './data/products.js';
 import { createProductCard } from './components/productCard.js';
 import { addToCart, getCartCount, getCartItems, getCartTotal } from './services/cartService.js';
 import { formatPrice } from './utils/format.js';
-import logoImage from '../assets/images/Gemini_Generated_Image_ov1q8qov1q8qov1q-Photoroom.png';
+import logoImage from '../assets/images/image-removebg-preview.png';
+import appleBackgroundImage from '../assets/images/image-removebg-preview.png';
+import samsungBackgroundImage from '../assets/images/Samgungs.png';
 
 const app = document.querySelector('#app');
 
 function renderApp() {
   app.innerHTML = `
+    <div class="brand-background" aria-hidden="true">
+      <img class="brand-background__apple" src="${appleBackgroundImage}" alt="" />
+      <img class="brand-background__samsung" src="${samsungBackgroundImage}" alt="" />
+    </div>
     <header class="site-header">
       <nav class="navbar navbar-expand-lg" aria-label="Navegación principal">
         <div class="container">

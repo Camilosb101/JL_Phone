@@ -1,7 +1,7 @@
 export function formatPrice(value) {
-  return new Intl.NumberFormat('es-ES', {
+  return new Intl.NumberFormat('es-CO', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'COP',
     maximumFractionDigits: 0
   }).format(value);
 }
