@@ -1,0 +1,41 @@
+.site-header {
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.navbar {
+  min-height: 82px;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand-mark img {
+  width: 74px;
+  height: 46px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.nav-link {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-text);
+}
+
+.navbar-toggler {
+  border: 1px solid var(--border-subtle);
+  color: var(--color-text);
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}

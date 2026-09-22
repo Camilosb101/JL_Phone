@@ -1,0 +1,62 @@
+.icon-button,
+.cart-button {
+  border: 0;
+  color: var(--color-text);
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.icon-button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.cart-button {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.cart-count {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-background);
+  font-size: 0.7rem;
+}
+
+.btn-primary-brand {
+  padding: 0.95rem 1.35rem;
+  border: 0;
+  color: #fff;
+  background: var(--gradient-brand);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.btn-primary-brand:hover {
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0, 163, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-primary-brand span {
+  margin-left: 0.7rem;
+  font-size: 1.1rem;
+}

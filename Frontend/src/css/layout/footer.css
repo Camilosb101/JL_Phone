@@ -1,0 +1,15 @@
+.site-footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.footer-status {
+  color: #50e3a4;
+}
+
+.footer-status i {
+  margin-right: 0.35rem;
+  font-size: 0.45rem;
+}

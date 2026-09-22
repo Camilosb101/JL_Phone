@@ -1,0 +1,33 @@
+.brand-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.brand-background__apple,
+.brand-background__samsung {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  height: min(78vh, 660px);
+  opacity: 0.22;
+  filter: grayscale(1) brightness(1.55) contrast(0.85) drop-shadow(0 0 36px rgba(240, 240, 245, 0.32));
+  mix-blend-mode: screen;
+  transform: translateY(-50%);
+}
+
+.brand-background__apple {
+  left: -12rem;
+}
+
+.brand-background__samsung {
+  right: -7.5rem;
+}
+
+.section-padding {
+  position: relative;
+  z-index: 1;
+  padding: 7rem 0;
+}

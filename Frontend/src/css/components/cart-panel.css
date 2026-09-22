@@ -1,0 +1,125 @@
+.cart-panel {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: min(100%, 430px);
+  height: 100vh;
+  padding: 2rem;
+  flex-direction: column;
+  background: var(--color-surface);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.4);
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+}
+
+.cart-open .cart-panel {
+  transform: translateX(0);
+}
+
+.cart-backdrop {
+  position: fixed;
+  z-index: 19;
+  inset: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.cart-open .cart-backdrop {
+  visibility: visible;
+  opacity: 1;
+}
+
+.cart-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.cart-panel__header h2 {
+  font-size: 2.4rem;
+}
+
+.cart-panel__items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 0;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cart-item img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.cart-item strong,
+.cart-item span {
+  display: block;
+}
+
+.cart-item strong {
+  font: 0.9rem var(--font-display);
+}
+
+.cart-item span {
+  margin-top: 0.3rem;
+  color: var(--color-text-muted);
+  font-size: 0.68rem;
+}
+
+.cart-item b {
+  font: 0.8rem var(--font-display);
+}
+
+.cart-panel__footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cart-panel__footer > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.cart-panel__footer strong {
+  color: var(--color-text);
+  font: 1.2rem var(--font-display);
+}
+
+.cart-empty {
+  padding-top: 35%;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.cart-empty span {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+.cart-empty p {
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+  font: 1.15rem var(--font-display);
+}
+
+.cart-empty small {
+  font-size: 0.72rem;
+}

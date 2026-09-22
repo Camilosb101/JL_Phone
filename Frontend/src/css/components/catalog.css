@@ -1,0 +1,34 @@
+.catalog-section {
+  background: #101319;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  font-weight: 600;
+}
+
+.filter-button,
+.sort-select {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-subtle);
+  color: var(--color-text-muted);
+  background: transparent;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.filter-button.active,
+.filter-button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.sort-select {
+  color: var(--color-text);
+}
+
+.sort-select option {
+  color: var(--color-background);
+}
