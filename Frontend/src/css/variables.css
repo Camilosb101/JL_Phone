@@ -1,0 +1,15 @@
+:root {
+  --color-background: #0d0e12;
+  --color-surface: #161b22;
+  --color-surface-raised: #1d232c;
+  --color-primary: #00a3ff;
+  --color-secondary: #9d25ff;
+  --color-text: #f0f0f5;
+  --color-text-muted: #8e8e9e;
+  --gradient-brand: linear-gradient(135deg, #9d25ff 0%, #00a3ff 100%);
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.24);
+  --shadow-glow: 0 0 40px rgba(0, 163, 255, 0.12);
+  --border-subtle: rgba(240, 240, 245, 0.1);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
