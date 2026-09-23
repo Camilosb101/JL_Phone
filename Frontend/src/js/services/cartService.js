@@ -10,7 +10,9 @@ function saveToStorage() {
 
 function loadFromStorage() {
   try {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
     if (Array.isArray(data)) {
       cartItems = new Map(data);
     }
@@ -38,6 +40,14 @@ export function removeFromCart(productId) {
 
   saveToStorage();
   eventBus.emit('cart:updated', { items: getCartItems(), count: getCartCount(), total: getCartTotal() });
+}
+
+export function deleteItemFromCart(productId) {
+  if (cartItems.has(productId)) {
+    cartItems.delete(productId);
+    saveToStorage();
+    eventBus.emit('cart:updated', { items: getCartItems(), count: getCartCount(), total: getCartTotal() });
+  }
 }
 
 export function clearCart() {

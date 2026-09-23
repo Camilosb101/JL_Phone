@@ -34,6 +34,7 @@ export function renderCatalogSection() {
 export function mountCatalogSection() {
   let currentFilter = 'all';
   let currentSort = 'featured';
+  let currentSearch = '';
 
   const productGrid = document.getElementById('productGrid');
   const filterButtons = document.querySelectorAll('.filter-button[data-filter]');
@@ -41,22 +42,62 @@ export function mountCatalogSection() {
 
   const renderProducts = (items) => {
     if (!productGrid) return;
-    productGrid.innerHTML = items.map(p => `<div class="col-12 col-md-6 col-xl-4">${createProductCard(p)}</div>`).join('');
+    if (items.length === 0) {
+      productGrid.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <p class="section-kicker justify-content-center"><span></span> Sin resultados</p>
+          <h3 class="mb-3" style="font-family: var(--font-display);">No encontramos dispositivos para tu búsqueda.</h3>
+          <p class="text-muted mb-4" style="font-size: 0.85rem;">Prueba buscando otra marca o modelo.</p>
+          <button class="btn btn-outline-light" id="resetCatalogFilters" type="button" style="font-size: 0.76rem; font-weight: 800;">
+            Ver todos los productos
+          </button>
+        </div>
+      `;
+      const resetBtn = document.getElementById('resetCatalogFilters');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          currentFilter = 'all';
+          currentSearch = '';
+          const searchInput = document.getElementById('navbarSearchInput');
+          if (searchInput) searchInput.value = '';
+          updateActiveFilterButton();
+          getFilteredAndSorted();
+        });
+      }
+      return;
+    }
+
+    productGrid.innerHTML = items.map(p => `
+      <div class="col-12 col-md-6 col-xl-4">
+        ${createProductCard(p)}
+      </div>
+    `).join('');
   };
 
   const getFilteredAndSorted = () => {
     let filtered = products;
+
     if (currentFilter !== 'all') {
-      filtered = products.filter(p => p.brand === currentFilter);
+      filtered = filtered.filter(p => p.brand === currentFilter);
     }
-    
+
+    if (currentSearch) {
+      const q = currentSearch.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(q) ||
+        p.model.toLowerCase().includes(q) ||
+        p.brand.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+      );
+    }
+
     let sorted = [...filtered];
     if (currentSort === 'price-asc') {
       sorted.sort((a, b) => a.price - b.price);
     } else if (currentSort === 'price-desc') {
       sorted.sort((a, b) => b.price - a.price);
     }
-    
+
     renderProducts(sorted);
   };
 
@@ -93,14 +134,21 @@ export function mountCatalogSection() {
     getFilteredAndSorted();
   });
 
+  eventBus.on('catalog:search', (query) => {
+    currentSearch = query;
+    getFilteredAndSorted();
+  });
+
   if (productGrid) {
     productGrid.addEventListener('click', (e) => {
+      // 1. Add to cart button
       const addToCartBtn = e.target.closest('[data-action="add-to-cart"]');
       if (addToCartBtn) {
+        e.stopPropagation();
         const productCard = addToCartBtn.closest('[data-product-id]');
         if (productCard) {
-          const productId = parseInt(productCard.dataset.productId, 10) || productCard.dataset.productId;
-          const product = products.find(p => p.id == productId);
+          const productId = productCard.dataset.productId;
+          const product = products.find(p => p.id === productId);
           if (product) {
             addToCart(product);
             const originalText = addToCartBtn.innerHTML;
@@ -113,11 +161,11 @@ export function mountCatalogSection() {
         return;
       }
 
-      const quickViewBtn = e.target.closest('[data-action="quick-view"]');
-      if (quickViewBtn) {
-        const productCard = quickViewBtn.closest('[data-product-id]');
-        if (productCard) {
-          const productId = productCard.dataset.productId;
+      // 2. Click anywhere on card -> navigate to detail
+      const productCard = e.target.closest('[data-product-id]');
+      if (productCard) {
+        const productId = productCard.dataset.productId;
+        if (productId) {
           router.navigate(`/producto/${productId}`);
         }
       }

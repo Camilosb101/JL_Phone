@@ -11,19 +11,24 @@
   position: absolute;
   top: 50%;
   width: auto;
-  height: min(78vh, 660px);
+  height: min(68vh, 550px);
   opacity: 0.22;
-  filter: grayscale(1) brightness(1.55) contrast(0.85) drop-shadow(0 0 36px rgba(240, 240, 245, 0.32));
   mix-blend-mode: screen;
+  filter: grayscale(1) 
+          brightness(1.8) 
+          contrast(1.15) 
+          drop-shadow(0 0 25px rgba(225, 240, 255, 0.6)) 
+          drop-shadow(0 0 50px rgba(180, 210, 245, 0.4));
   transform: translateY(-50%);
+  transition: opacity 0.3s ease;
 }
 
 .brand-background__apple {
-  left: -12rem;
+  left: -8rem;
 }
 
 .brand-background__samsung {
-  right: -7.5rem;
+  right: -7rem;
 }
 
 .section-padding {

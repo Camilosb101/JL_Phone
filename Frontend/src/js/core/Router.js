@@ -17,11 +17,31 @@ class Router {
   }
 
   _matchRoute(hash) {
-    const rawPath = hash.replace(/^#\/?/, '');
-    const path = rawPath ? `/${rawPath}` : '/';
+    const raw = hash.replace(/^#/, '').trim();
+
+    // Check if hash is an anchor on the homepage like catalogo, experiencia, inicio
+    const inPageAnchors = ['catalogo', 'experiencia', 'inicio'];
+    if (inPageAnchors.includes(raw)) {
+      const homeRoute = this._routes.find(r => r.path === '/');
+      return {
+        handler: (root) => {
+          const targetEl = document.getElementById(raw);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          } else if (homeRoute) {
+            homeRoute.handler(root, {});
+            setTimeout(() => {
+              document.getElementById(raw)?.scrollIntoView({ behavior: 'smooth' });
+            }, 60);
+          }
+        },
+        params: {}
+      };
+    }
+
+    const path = raw ? (raw.startsWith('/') ? raw : `/${raw}`) : '/';
 
     for (const route of this._routes) {
-      // Check for parameterized routes like /producto/:id
       const routeParts = route.path.split('/');
       const pathParts = path.split('/');
 
@@ -44,6 +64,12 @@ class Router {
       }
     }
 
+    // Default fallback to home route
+    const defaultRoute = this._routes.find(r => r.path === '/');
+    if (defaultRoute) {
+      return { handler: defaultRoute.handler, params: {} };
+    }
+
     return null;
   }
 
@@ -51,6 +77,10 @@ class Router {
     const handleRoute = () => {
       const result = this._matchRoute(window.location.hash);
       if (result && this._rootElement) {
+        // Scroll to top when changing full pages unless anchor is specified
+        if (!window.location.hash.includes('catalogo') && !window.location.hash.includes('experiencia')) {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
         result.handler(this._rootElement, result.params);
       }
     };

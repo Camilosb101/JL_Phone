@@ -1,6 +1,4 @@
 @media (max-width: 991.98px) {
-	.navbar-collapse { padding: 1rem 0; }
-	.navbar-actions { padding-top: 1rem; }
 	.hero-grid { grid-template-columns: 1fr; min-height: auto; }
 	.hero-copy { padding: 4rem 0 1rem; }
 	.hero-visual { height: 390px; margin-top: 1rem; }
@@ -8,11 +6,13 @@
 	.hero-spec--top { top: 12%; right: 0; }
 	.hero-spec--bottom { bottom: 4%; right: 0; }
 	.experience-panel { grid-template-columns: 1fr; gap: 3rem; }
+	.brand-background__apple { left: -8rem; height: 420px; }
+	.brand-background__samsung { right: -7rem; height: 420px; }
 }
 
 @media (max-width: 575.98px) {
-	.brand-background__apple { left: -10rem; height: 430px; }
-	.brand-background__samsung { right: -7rem; height: 430px; }
+	.brand-background__apple { left: -6.5rem; height: 340px; opacity: 0.14; }
+	.brand-background__samsung { right: -5.5rem; height: 340px; opacity: 0.14; }
 	.section-padding { padding: 5rem 0; }
 	.hero-section { min-height: auto; }
 	.hero-copy { padding-top: 3rem; }

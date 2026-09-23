@@ -1,5 +1,5 @@
 .catalog-section {
-  background: #101319;
+  background: linear-gradient(to bottom, #101319 0%, #101319 88%, rgba(16, 19, 25, 0.6) 96%, transparent 100%);
 }
 
 h2 {

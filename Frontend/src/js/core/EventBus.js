@@ -7,13 +7,23 @@ class EventBus {
     if (!this._listeners[event]) {
       this._listeners[event] = [];
     }
-    this._listeners[event].push(callback);
+    if (!this._listeners[event].includes(callback)) {
+      this._listeners[event].push(callback);
+    }
     return () => this.off(event, callback);
   }
 
   off(event, callback) {
     if (!this._listeners[event]) return;
     this._listeners[event] = this._listeners[event].filter(cb => cb !== callback);
+  }
+
+  clear(event) {
+    if (event) {
+      delete this._listeners[event];
+    } else {
+      this._listeners = {};
+    }
   }
 
   emit(event, data) {

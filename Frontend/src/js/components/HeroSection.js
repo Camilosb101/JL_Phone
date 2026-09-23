@@ -1,5 +1,5 @@
 import appleBackgroundImage from '../../assets/images/image-removebg-preview.png';
-import samsungBackgroundImage from '../../assets/images/Samgungs.png';
+import samsungBackgroundImage from '../../assets/images/samsung-logo.png';
 import { eventBus } from '../core/EventBus.js';
 
 export function renderHeroSection() {
@@ -11,19 +11,19 @@ export function renderHeroSection() {
 <section id="inicio" class="hero-section">
   <div class="hero-grid container">
     <div class="hero-copy">
-      <p class="section-kicker"><span></span> La nueva generación, aquí</p>
+      <p class="section-kicker"><span></span> Equipos 100% garantizados</p>
       <h1>Tu próximo<br /><em>smartphone</em><br />empieza aquí.</h1>
-      <p class="hero-lede">Tecnología premium seleccionada para quienes no se conforman con lo de siempre.</p>
+      <p class="hero-lede">Estrena iPhone o Samsung hoy. Recibimos tu celular usado como parte de pago y te asesoramos sin letra pequeña.</p>
       <div class="hero-actions d-flex flex-wrap align-items-center gap-3">
-        <a class="btn btn-primary-brand" href="#catalogo">Explorar catálogo <span>↘</span></a>
-        <span class="hero-note"><span class="status-dot"></span> Respuesta inmediata 24/7</span>
+        <a class="btn btn-primary-brand" href="#/" data-scroll-target="catalogo">Ver catálogo iPhone &amp; Samsung <span>↘</span></a>
+        <span class="hero-note"><span class="status-dot whatsapp-status" aria-hidden="true">◉</span> Respuesta inmediata 24/7</span>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-glow"></div>
       <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=1100&q=90" alt="Smartphone premium" />
-      <div class="hero-spec hero-spec--top"><span>01</span><strong>Colección<br />Pro</strong></div>
-      <div class="hero-spec hero-spec--bottom"><strong>Diseñado<br />para destacar</strong><span>↗</span></div>
+      <a class="hero-spec hero-spec--top" href="#/producto/iphone-15-pro-max" aria-label="Ver detalles del iPhone 15 Pro Max"><span>01</span><strong>Colección<br />Pro</strong></a>
+      <a class="hero-spec hero-spec--bottom" href="#/producto/iphone-15-pro-max"><strong>Ver iPhone 15 Pro<br />Max</strong><span>↗</span></a>
     </div>
   </div>
   <div class="hero-marquee">

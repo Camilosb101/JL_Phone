@@ -7,9 +7,9 @@ import { renderCartPanel, mountCartPanel } from '../components/CartPanel.js';
 
 export function renderHomePage(rootElement) {
   rootElement.innerHTML = `
-    ${renderHeroSection()}
     ${renderHeader()}
     <main>
+      ${renderHeroSection()}
       ${renderCatalogSection()}
       ${renderExperienceSection()}
     </main>

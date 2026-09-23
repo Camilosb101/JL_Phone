@@ -20,6 +20,16 @@
   color: var(--color-primary);
 }
 
+.icon-button--sm {
+  width: 26px;
+  height: 26px;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
 .cart-button {
   display: flex;
   gap: 0.6rem;

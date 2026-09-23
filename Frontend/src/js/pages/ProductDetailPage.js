@@ -70,6 +70,9 @@ export function renderProductDetailPage(rootElement, params) {
                 <button class="btn btn-primary-brand" type="button" id="addToCartDetail" style="flex:1;">
                   Añadir al carrito <span>＋</span>
                 </button>
+                <button class="btn btn-outline-light" type="button" data-action="open-cart" style="padding: 0.95rem 1.35rem; font-size: 0.76rem; font-weight: 800;">
+                  Ver Carrito
+                </button>
               </div>
               ${product.stock <= 5 ? `<p style="color:#ff6b6b; font-size:.72rem; margin-top:.75rem;">⚡ Solo quedan ${product.stock} unidades</p>` : ''}
             </div>

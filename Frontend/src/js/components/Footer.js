@@ -1,4 +1,4 @@
-import logoImage from '../../assets/images/image-removebg-preview .png';
+import logoImage from '../../assets/images/logo.png';
 
 export function renderFooter() {
   return `
