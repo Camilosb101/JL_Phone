@@ -5,7 +5,7 @@ export function createProductCard(product) {
     <article class="product-card h-100" data-product-id="${product.id}">
       <div class="product-card__image-wrap">
         <span class="product-card__brand">${product.brand}</span>
-        <img class="product-card__image" src="${product.images[0]}" alt="${product.name}" loading="lazy" />
+        <img class="product-card__image" src="${product.images[0]}" alt="${product.name}" />
         <button class="icon-button product-card__quick-view" type="button" data-action="quick-view" aria-label="Ver detalles de ${product.name}" title="Ver detalles">
           ↗
         </button>

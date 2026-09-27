@@ -70,3 +70,29 @@
   margin-left: 0.7rem;
   font-size: 1.1rem;
 }
+
+/* ============================================================
+   CÍRCULOS SELECTORES DE COLOR (página de detalle)
+   El color de cada círculo viene de la variable --swatch-color,
+   que se define en línea desde el JS con el "hex" de cada color.
+   ============================================================ */
+.color-swatch {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--swatch-color, #888);
+  border: 2px solid var(--border-subtle);
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition: transform 0.15s ease, outline-color 0.15s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch.active {
+  outline-color: var(--color-primary);
+}

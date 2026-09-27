@@ -1,4 +1,4 @@
-import { products } from '../data/products.js';
+import { getAllProducts } from '../services/productService.js';
 import { createProductCard } from './ProductCard.js';
 import { addToCart } from '../services/cartService.js';
 import { eventBus } from '../core/EventBus.js';
@@ -31,10 +31,20 @@ export function renderCatalogSection() {
   `;
 }
 
-export function mountCatalogSection() {
+export async function mountCatalogSection() {
   let currentFilter = 'all';
   let currentSort = 'featured';
   let currentSearch = '';
+
+  // Cargamos los productos una sola vez desde la puerta de datos (productService).
+  // A partir de aquí trabajamos con esta lista en memoria (filtrar, ordenar, buscar).
+  let allProducts = [];
+  try {
+    allProducts = await getAllProducts();
+  } catch (error) {
+    console.error('No se pudieron cargar los productos:', error);
+    allProducts = [];
+  }
 
   const productGrid = document.getElementById('productGrid');
   const filterButtons = document.querySelectorAll('.filter-button[data-filter]');
@@ -75,7 +85,7 @@ export function mountCatalogSection() {
   };
 
   const getFilteredAndSorted = () => {
-    let filtered = products;
+    let filtered = allProducts;
 
     if (currentFilter !== 'all') {
       filtered = filtered.filter(p => p.brand === currentFilter);
@@ -148,7 +158,7 @@ export function mountCatalogSection() {
         const productCard = addToCartBtn.closest('[data-product-id]');
         if (productCard) {
           const productId = productCard.dataset.productId;
-          const product = products.find(p => p.id === productId);
+          const product = allProducts.find(p => p.id === productId);
           if (product) {
             addToCart(product);
             const originalText = addToCartBtn.innerHTML;

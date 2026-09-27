@@ -1,5 +1,6 @@
 import appleBackgroundImage from '../../assets/images/image-removebg-preview.png';
 import samsungBackgroundImage from '../../assets/images/samsung-logo.png';
+import heroImage from '../../assets/images/iphone-18-promax-cereza.png';
 import { eventBus } from '../core/EventBus.js';
 
 export function renderHeroSection() {
@@ -21,7 +22,7 @@ export function renderHeroSection() {
     </div>
     <div class="hero-visual">
       <div class="hero-glow"></div>
-      <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=1100&q=90" alt="Smartphone premium" />
+      <img src="${heroImage}" alt="iPhone 18 Pro Max en sus cuatro colores" />
       <a class="hero-spec hero-spec--top" href="#/producto/iphone-15-pro-max" aria-label="Ver detalles del iPhone 15 Pro Max"><span>01</span><strong>Colección<br />Pro</strong></a>
       <a class="hero-spec hero-spec--bottom" href="#/producto/iphone-15-pro-max"><strong>Ver iPhone 15 Pro<br />Max</strong><span>↗</span></a>
     </div>

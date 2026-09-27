@@ -14,17 +14,28 @@
   height: min(68vh, 550px);
   opacity: 0.22;
   mix-blend-mode: screen;
-  filter: grayscale(1) 
-          brightness(1.8) 
-          contrast(1.15) 
-          drop-shadow(0 0 25px rgba(225, 240, 255, 0.6)) 
-          drop-shadow(0 0 50px rgba(180, 210, 245, 0.4));
   transform: translateY(-50%);
   transition: opacity 0.3s ease;
 }
 
+/* Logo de Samsung: resplandor plateado (como estaba). */
+.brand-background__samsung {
+  filter: grayscale(1)
+          brightness(1.8)
+          contrast(1.15)
+          drop-shadow(0 0 25px rgba(225, 240, 255, 0.6))
+          drop-shadow(0 0 50px rgba(180, 210, 245, 0.4));
+}
+
+/* Manzana de Apple: mismo estilo, pero con sombra MORADA discreta
+   en vez de plateada (se mantiene la transparencia). */
 .brand-background__apple {
   left: -8rem;
+  filter: grayscale(1)
+          brightness(1.8)
+          contrast(1.15)
+          drop-shadow(0 0 25px rgba(157, 92, 255, 0.55))
+          drop-shadow(0 0 50px rgba(124, 77, 255, 0.35));
 }
 
 .brand-background__samsung {

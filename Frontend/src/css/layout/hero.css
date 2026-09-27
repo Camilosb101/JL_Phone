@@ -93,12 +93,15 @@ h2 em {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: min(100%, 560px);
-  height: 90%;
-  object-fit: cover;
-  opacity: 0.92;
-  mix-blend-mode: screen;
-  mask-image: linear-gradient(to bottom, #000 76%, transparent 100%);
+  width: min(100%, 620px);
+  height: 100%;
+  /* La imagen ya viene con fondo transparente; la mostramos completa
+     (contain), a plena opacidad (nada de transparencia) para que el
+     color cereza se vea intenso, no pálido. */
+  object-fit: contain;
+  opacity: 1;
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.45));
 }
 
 .hero-glow {
