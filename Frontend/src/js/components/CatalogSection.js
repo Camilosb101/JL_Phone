@@ -106,6 +106,9 @@ export async function mountCatalogSection() {
       sorted.sort((a, b) => a.price - b.price);
     } else if (currentSort === 'price-desc') {
       sorted.sort((a, b) => b.price - a.price);
+    } else if (currentSort === 'featured') {
+      // Destacados primero (los que tienen featured: true), manteniendo el orden original entre ellos.
+      sorted.sort((a, b) => (b.featured === true) - (a.featured === true));
     }
 
     renderProducts(sorted);

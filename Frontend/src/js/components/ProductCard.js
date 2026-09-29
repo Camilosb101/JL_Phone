@@ -6,9 +6,7 @@ export function createProductCard(product) {
       <div class="product-card__image-wrap">
         <span class="product-card__brand">${product.brand}</span>
         <img class="product-card__image" src="${product.images[0]}" alt="${product.name}" />
-        <button class="icon-button product-card__quick-view" type="button" data-action="quick-view" aria-label="Ver detalles de ${product.name}" title="Ver detalles">
-          ↗
-        </button>
+        <span class="icon-button product-card__quick-view" aria-hidden="true">↗</span>
       </div>
       <div class="product-card__body d-flex flex-column">
         <div class="d-flex justify-content-between gap-3 align-items-start">

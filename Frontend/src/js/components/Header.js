@@ -1,4 +1,4 @@
-import logoImage from '../../assets/images/logo.png';
+import logoImage from '../../assets/images/image.png';
 import { getCartCount } from '../services/cartService.js';
 import { eventBus } from '../core/EventBus.js';
 import { router } from '../core/Router.js';
