@@ -10,8 +10,9 @@ h2 {
 
 .filter-button,
 .sort-select {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.25rem;
   border: 1px solid var(--border-subtle);
+  border-radius: 999px;
   color: var(--color-text-muted);
   background: transparent;
   font-size: 0.72rem;
@@ -21,8 +22,8 @@ h2 {
 
 .filter-button.active,
 .filter-button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
 }
 
 .sort-select {

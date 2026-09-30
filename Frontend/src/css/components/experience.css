@@ -9,9 +9,11 @@
 .experience-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  padding: 4rem;
+  gap: 1.5rem 4rem;
+  align-items: start;
+  padding: 2.5rem 3rem 1.5rem;
   border: 1px solid var(--border-subtle);
+  border-radius: 24px;
   background: linear-gradient(110deg, rgba(157, 37, 255, 0.12), rgba(22, 27, 34, 0.75) 60%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -20,13 +22,13 @@
 
 .experience-list {
   display: grid;
-  gap: 1.2rem;
+  gap: 0.5rem;
 }
 
 .experience-list > div {
   display: flex;
   gap: 1.5rem;
-  padding: 1.2rem 0;
+  padding: 0.8rem 0;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -45,4 +47,55 @@
 .experience-list strong {
   color: var(--color-text);
   font-size: 0.9rem;
+}
+
+/* Imagen del Plan Canje, debajo del título (columna izquierda del panel). */
+.experience-image {
+  display: block;
+  width: 100%;
+  max-height: 240px;
+  margin-top: 1.25rem;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Nota de condición de servicio: ocupa todo el ancho del panel (las dos
+   columnas), separada arriba por una línea. Letra tenue pero legible. */
+.experience-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Botón de WhatsApp del Plan Canje. */
+.btn-whatsapp-canje {
+  display: inline-flex;
+  align-self: start;
+  justify-self: start;
+  width: fit-content;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #06251a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-whatsapp-canje:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp-canje__icon {
+  font-size: 1.05rem;
 }

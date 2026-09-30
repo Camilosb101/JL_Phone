@@ -44,10 +44,10 @@ export async function renderProductDetailPage(rootElement, params) {
   rootElement.innerHTML = `
     ${renderHeader()}
     <main>
-      <section class="section-padding" style="position:relative; z-index:1;">
+      <section style="position:relative; z-index:1; padding:2rem 0 4rem;">
         <div class="container">
-          <a href="#/" class="btn btn-outline-light" style="margin-bottom:2rem; font-size:.76rem; font-weight:800;">← Volver al catálogo</a>
-          <div class="row g-5 align-items-center">
+          <a href="#/" class="btn btn-outline-light" style="margin-bottom:1.25rem; font-size:.76rem; font-weight:800;">← Volver al catálogo</a>
+          <div class="row g-5 align-items-start">
             <div class="col-12 col-lg-6">
               <div class="product-card__image-wrap" style="height:clamp(340px, 45vw, 480px); border-radius:20px; overflow:hidden; background:radial-gradient(circle at 50% 50%, #ffffff 0%, #f4f5f8 60%, #e6e8ee 100%); padding:clamp(1.5rem, 3.5vw, 2.5rem); box-shadow:0 12px 32px rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.06);">
                 <img id="detailMainImage" class="product-card__image" src="${product.images[0]}" alt="${product.name}" style="width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 20px 32px rgba(0,0,0,0.18)); transition:opacity .25s ease, transform .35s ease;" />
