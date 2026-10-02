@@ -132,12 +132,5 @@
   color: var(--color-text);
 }
 
-.checkout-notice {
-  padding: 0.85rem 1rem;
-  background: rgba(0, 163, 255, 0.12);
-  border: 1px solid rgba(0, 163, 255, 0.3);
-  border-radius: 6px;
-  color: var(--color-text);
-  font-size: 0.78rem;
-}
+
 

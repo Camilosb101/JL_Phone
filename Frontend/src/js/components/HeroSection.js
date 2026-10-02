@@ -23,16 +23,15 @@ export function renderHeroSection() {
     <div class="hero-visual">
       <div class="hero-glow"></div>
       <img src="${heroImage}" alt="iPhone 18 Pro Max Dark Cherry" />
-      <a class="hero-spec hero-spec--top" href="#/producto/iphone-18-pro-max" aria-label="Ver detalles del iPhone 18 Pro Max"><span>01</span><strong>Colección<br />Pro</strong></a>
       <a class="hero-spec hero-spec--bottom" href="#/producto/iphone-18-pro-max"><strong>Ver iPhone 18 Pro<br />Max</strong><span>↗</span></a>
     </div>
   </div>
   <div class="hero-marquee">
     <button class="hero-brand-button" type="button" data-filter="Apple">APPLE</button>
     <i></i>
-    <button class="hero-brand-button" type="button" data-filter="Samsung">SAMSUNG</button>
-    <i></i>
     <span>PREMIUM TECH</span>
+    <i></i>
+    <button class="hero-brand-button" type="button" data-filter="Samsung">SAMSUNG</button>
   </div>
 </section>
   `;

@@ -6,6 +6,7 @@
 	.hero-spec--top { top: 12%; right: 0; }
 	.hero-spec--bottom { bottom: 4%; right: 0; }
 	.experience-panel { grid-template-columns: 1fr; gap: 3rem; }
+	.info-page__intro { min-height: 40vh; }
 	.brand-background__apple { left: -8rem; height: 420px; }
 	.brand-background__samsung { right: -7rem; height: 420px; }
 }
@@ -27,5 +28,10 @@
 	.catalog-tools { width: 100%; }
 	.filter-button, .sort-select { flex: 1; }
 	.experience-panel { padding: 2rem 1.25rem; }
+	.experience-actions { align-items: stretch; flex-direction: column; }
+	.experience-actions .btn-whatsapp-canje,
+	.experience-actions .btn-more-info { justify-content: center; width: 100%; }
+	.info-grid { grid-template-columns: 1fr; }
+	.info-page__brands { align-items: flex-start; flex-direction: column; }
 	.site-footer small { order: 3; }
 }

@@ -19,7 +19,8 @@ export function createProductCard(product) {
         <p class="product-card__description">${product.description}</p>
         <div class="product-card__meta mt-auto">
           <span>▱ ${product.storage[0]}</span>
-          <span>● ${product.colors[0]}</span>
+          <span>● ${product.colors.join(', ')}</span>
+          ${product.isUsed ? `<span>▣ ${product.specifications.bateria}</span>` : ''}
         </div>
         <button class="btn btn-outline-light product-card__button mt-4" type="button" data-action="add-to-cart">
           Añadir al carrito <span>＋</span>

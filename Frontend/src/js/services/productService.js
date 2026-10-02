@@ -14,6 +14,7 @@
 
 import { FUENTE_DE_DATOS, API_URL } from '../config.js';
 import { products as productosLocales } from '../data/products.js';
+import { usedProducts } from '../data/usedProducts.js';
 
 /**
  * Devuelve TODOS los productos de la tienda.
@@ -54,6 +55,6 @@ export async function getProductById(id) {
   }
 
   // --- MODO LOCAL (por defecto) ---
-  const producto = productosLocales.find((p) => p.id === id);
+  const producto = [...productosLocales, ...usedProducts].find((p) => p.id === id);
   return producto ?? null;
 }

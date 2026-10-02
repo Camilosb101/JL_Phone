@@ -35,6 +35,8 @@ export async function mountCatalogSection() {
   let currentFilter = 'all';
   let currentSort = 'featured';
   let currentSearch = '';
+  // Al inicio solo mostramos los destacados; "Ver todos" muestra el resto.
+  let mostrarTodos = false;
 
   // Cargamos los productos una sola vez desde la puerta de datos (productService).
   // A partir de aquí trabajamos con esta lista en memoria (filtrar, ordenar, buscar).
@@ -50,7 +52,7 @@ export async function mountCatalogSection() {
   const filterButtons = document.querySelectorAll('.filter-button[data-filter]');
   const sortSelect = document.getElementById('sortProducts');
 
-  const renderProducts = (items) => {
+  const renderProducts = (items, ocultos = 0) => {
     if (!productGrid) return;
     if (items.length === 0) {
       productGrid.innerHTML = `
@@ -68,6 +70,7 @@ export async function mountCatalogSection() {
         resetBtn.addEventListener('click', () => {
           currentFilter = 'all';
           currentSearch = '';
+          mostrarTodos = false;
           const searchInput = document.getElementById('navbarSearchInput');
           if (searchInput) searchInput.value = '';
           updateActiveFilterButton();
@@ -77,11 +80,30 @@ export async function mountCatalogSection() {
       return;
     }
 
-    productGrid.innerHTML = items.map(p => `
+    const tarjetas = items.map(p => `
       <div class="col-12 col-md-6 col-xl-4">
         ${createProductCard(p)}
       </div>
     `).join('');
+
+    // Si hay productos ocultos, mostramos un botón "Ver todos" al final.
+    const verTodos = ocultos > 0 ? `
+      <div class="col-12 text-center mt-4">
+        <button class="btn btn-outline-light" id="verTodosBtn" type="button" style="font-size: 0.76rem; font-weight: 800;">
+          Ver todos los productos (${ocultos} más)
+        </button>
+      </div>
+    ` : '';
+
+    productGrid.innerHTML = tarjetas + verTodos;
+
+    const verTodosBtn = document.getElementById('verTodosBtn');
+    if (verTodosBtn) {
+      verTodosBtn.addEventListener('click', () => {
+        mostrarTodos = true;
+        getFilteredAndSorted();
+      });
+    }
   };
 
   const getFilteredAndSorted = () => {
@@ -111,7 +133,16 @@ export async function mountCatalogSection() {
       sorted.sort((a, b) => (b.featured === true) - (a.featured === true));
     }
 
-    renderProducts(sorted);
+    // Vista resumida: en la portada (filtro "Todos", sin búsqueda y sin "Ver todos")
+    // mostramos los primeros 9 productos para llenar 3 filas completas (3 por fila).
+    const LIMITE_PORTADA = 9;
+    const vistaResumida = currentFilter === 'all' && !currentSearch && !mostrarTodos;
+    if (vistaResumida && sorted.length > LIMITE_PORTADA) {
+      const visibles = sorted.slice(0, LIMITE_PORTADA);
+      renderProducts(visibles, sorted.length - LIMITE_PORTADA);
+    } else {
+      renderProducts(sorted, 0);
+    }
   };
 
   const updateActiveFilterButton = () => {
@@ -129,6 +160,7 @@ export async function mountCatalogSection() {
   filterButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       currentFilter = e.target.dataset.filter;
+      mostrarTodos = false;
       updateActiveFilterButton();
       getFilteredAndSorted();
     });
@@ -143,6 +175,7 @@ export async function mountCatalogSection() {
 
   eventBus.on('filter:brand', (brand) => {
     currentFilter = brand;
+    mostrarTodos = false;
     updateActiveFilterButton();
     getFilteredAndSorted();
   });

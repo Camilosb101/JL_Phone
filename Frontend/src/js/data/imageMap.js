@@ -4,7 +4,7 @@
 // Vite lee todas las imágenes de assets/images en tiempo de compilación.
 // { eager: true } hace que las URLs queden disponibles de inmediato.
 const modulos = import.meta.glob(
-  '../../assets/images/**/*.{png,jpg,jpeg,webp}',
+  '../../assets/images/**/*.{png,jpg,jpeg,webp,svg}',
   { eager: true, query: '?url', import: 'default' }
 );
 

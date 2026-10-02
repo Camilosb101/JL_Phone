@@ -91,6 +91,138 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.experience-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.experience-actions .btn-whatsapp-canje {
+  margin-top: 0;
+}
+
+.btn-more-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(240, 240, 245, 0.25);
+  border-radius: 999px;
+  background: rgba(240, 240, 245, 0.06);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.btn-more-info:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+  background: rgba(0, 163, 255, 0.12);
+}
+
+.info-page {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reducimos el padding grande de las secciones en la página de info,
+   para que no quede tanto espacio vacío al abrirla. */
+.info-page .section-padding {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.info-page__intro {
+  display: flex;
+  align-items: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.info-page__back {
+  margin-bottom: 1.25rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+}
+
+/* Título de la intro más compacto (no gigante). */
+.info-page__intro h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+}
+
+.info-page__intro .hero-lede {
+  margin: 0;
+}
+
+.info-page__content {
+  padding-top: 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--border-subtle);
+}
+
+.info-card {
+  min-height: 210px;
+  padding: 1.75rem;
+  background: rgba(22, 27, 34, 0.78);
+}
+
+.info-card__number {
+  color: var(--color-primary);
+  font: 1.35rem var(--font-display);
+}
+
+.info-card h2 {
+  margin: 1.4rem 0 0.6rem;
+  font: 600 1.1rem var(--font-display);
+}
+
+.info-card p {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.info-page__brands {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+}
+
+.info-page__brands strong {
+  color: var(--color-text);
+  font: 600 1rem var(--font-display);
+  letter-spacing: 0;
+}
+
+.info-page__brands i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 0.55rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  vertical-align: middle;
+}
+
 .btn-whatsapp-canje:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35);
@@ -98,4 +230,91 @@
 
 .btn-whatsapp-canje__icon {
   font-size: 1.05rem;
+}
+
+/* ============================================================
+   PLAN CANJE: cuadros alternados (info + casos de éxito)
+   Fondo blanco, esquinas redondeadas, texto a un lado y foto al otro.
+   ============================================================ */
+.info-page__cases {
+  padding-top: 0;
+}
+
+.info-cases__title {
+  margin: 0.25rem 0 1.5rem;
+  font: 600 clamp(1.6rem, 3.5vw, 2.4rem) var(--font-display);
+  line-height: 1.1;
+}
+
+.info-cases__title em {
+  color: var(--color-primary);
+  font-style: normal;
+}
+
+.case-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Fila invertida: la foto va a la izquierda y el texto a la derecha. */
+.case-row--reverse .case-row__text {
+  order: 2;
+}
+
+.case-row__tag {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.case-row__text h3 {
+  margin: 0 0 0.75rem;
+  color: #141821;
+  font: 600 clamp(1.3rem, 2.5vw, 1.9rem) var(--font-display);
+}
+
+.case-row__text p {
+  margin: 0;
+  color: #4a4f5a;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.case-row__media {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.case-row__media img {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* En celular: una sola columna, foto arriba del texto. */
+@media (max-width: 767.98px) {
+  .case-row,
+  .case-row--reverse {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .case-row--reverse .case-row__text {
+    order: 0;
+  }
+  .case-row__media img {
+    height: 220px;
+  }
 }

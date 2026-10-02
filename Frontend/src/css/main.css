@@ -10,6 +10,7 @@
 @import './components/cart-panel.css';
 @import './components/catalog.css';
 @import './components/experience.css';
+@import './components/used-catalog.css';
 @import './responsive.css';
 
 html {

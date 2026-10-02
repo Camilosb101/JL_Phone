@@ -1,11 +1,26 @@
 .site-header {
-  position: relative;
-  z-index: 10;
-  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(16, 19, 25, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(240, 240, 245, 0.14);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
-  min-height: 72px;
+  min-height: 56px;
+}
+
+.navbar-nav {
+  opacity: calc(1 - var(--nav-scroll-progress, 0));
+  transform: translateY(calc(var(--nav-scroll-progress, 0) * -6px));
+  transition: opacity 0.12s linear, transform 0.12s linear;
+}
+
+.site-header--used-page .navbar-nav {
+  display: none !important;
 }
 
 .brand-mark {
@@ -15,19 +30,44 @@
 
 .brand-mark img {
   width: 130px;
-  height: 74px;
+  height: 56px;
   object-fit: contain;
 }
 
 .nav-link {
+  position: relative;
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover,
+.nav-link:focus-visible,
 .nav-link.active {
-  color: var(--color-text);
+  color: #ffffff;
+}
+
+/* Subrayado animado al pasar el mouse / activo, para que se sienta navegable. */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 0;
 }
 
 .navbar-toggler {
@@ -41,24 +81,37 @@
 
 .search-container {
   position: relative;
-  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.9rem;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  pointer-events: none;
 }
 
 .search-input {
-  width: 170px;
-  padding: 0.45rem 0.85rem;
-  font-size: 0.76rem;
+  width: 240px;
+  padding: 0.55rem 1rem 0.55rem 2.4rem;
+  font-size: 0.82rem;
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(240, 240, 245, 0.16);
+  border-radius: 24px;
   outline: none;
-  transition: border-color 0.25s ease, width 0.25s ease;
+  transition: border-color 0.25s ease, width 0.25s ease, background 0.25s ease;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
 }
 
 .search-input:focus {
   border-color: var(--color-primary);
-  width: 210px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 280px;
 }
 
 /* Menu Toggle Button */
@@ -170,6 +223,20 @@
   font-size: 1rem;
   line-height: 1;
   display: inline-flex;
+}
+
+/* Icono (imagen) de un item del menú. */
+.quick-nav-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.quick-nav-icon--iphone {
+  display: block;
+  align-self: center;
+  width: 38px;
+  height: 38px;
 }
 
 /* WhatsApp Button in Menu */

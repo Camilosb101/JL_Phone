@@ -1,7 +1,7 @@
 .hero-section {
   position: relative;
   z-index: 1;
-  min-height: 720px;
+  min-height: 500px;
   overflow: hidden;
   background:
     radial-gradient(circle at 78% 40%, rgba(0, 163, 255, 0.13), transparent 30%),
@@ -10,7 +10,7 @@
 
 .hero-grid {
   display: grid;
-  min-height: 630px;
+  min-height: 410px;
   grid-template-columns: 0.9fr 1.1fr;
   align-items: center;
   gap: 2rem;
@@ -19,7 +19,7 @@
 .hero-copy {
   position: relative;
   z-index: 1;
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .section-kicker {
@@ -75,18 +75,23 @@ h2 em {
 }
 
 .status-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.5rem;
   border-radius: 50%;
   background: #50e3a4;
   box-shadow: 0 0 12px #50e3a4;
+  font-size: 0;
+  color: transparent;
 }
 
 .hero-visual {
   position: relative;
-  height: 620px;
+  height: 420px;
 }
 
 .hero-visual img {
@@ -137,16 +142,23 @@ h2 em {
   line-height: 1.5;
 }
 
-.hero-spec--top {
-  top: 20%;
-  right: 4%;
-}
-
 .hero-spec--bottom {
   right: 2%;
-  bottom: 16%;
-  align-items: end;
+  bottom: 8%;
+  align-items: center;
   text-align: right;
+  padding: 0.6rem 0.9rem;
+  background: rgba(13, 14, 18, 0.55);
+  border: 1px solid rgba(240, 240, 245, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-spec--bottom:hover {
+  border-color: var(--color-primary);
+  background: rgba(13, 14, 18, 0.7);
 }
 
 .hero-spec--bottom span {
@@ -174,6 +186,7 @@ h2 em {
 }
 
 .hero-brand-button {
+  position: relative;
   padding: 0;
   border: 0;
   color: #4d535e;
@@ -185,5 +198,23 @@ h2 em {
 
 .hero-brand-button:hover,
 .hero-brand-button:focus-visible {
-  color: var(--color-primary);
+  color: #ffffff;
+}
+
+.hero-brand-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.45rem;
+  height: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.hero-brand-button:hover::after,
+.hero-brand-button:focus-visible::after {
+  transform: scaleX(1);
 }

@@ -1,6 +1,7 @@
 import { getCartItems, getCartTotal, removeFromCart, addToCart, deleteItemFromCart, clearCart } from '../services/cartService.js';
 import { formatPrice } from '../utils/format.js';
 import { eventBus } from '../core/EventBus.js';
+import { abrirWhatsApp, construirMensajePedido } from '../services/whatsappService.js';
 
 let isCartEventsBound = false;
 
@@ -72,12 +73,8 @@ export function updateCartPanelUI() {
         <span>Total estimado</span>
         <strong>${formatPrice(getCartTotal())}</strong>
       </div>
-      <div id="checkoutNotice" class="checkout-notice d-none mb-3">
-        <p class="mb-1"><strong>✓ Resumen de compra generado</strong></p>
-        <small class="text-muted">Modo diseño activo. El resumen está listo para enlazarse con WhatsApp o pasarela en la siguiente etapa comercial.</small>
-      </div>
-      <button class="btn btn-primary-brand w-100 mb-2" type="button" data-action="checkout-demo">
-        Continuar con la compra <span>↗</span>
+      <button class="btn btn-primary-brand w-100 mb-2" type="button" data-action="checkout-whatsapp">
+        Pedir por WhatsApp <span>↗</span>
       </button>
       <button class="btn btn-link text-muted w-100 py-1" type="button" data-action="clear-cart" style="font-size: 0.72rem; text-decoration: none;">
         Vaciar carrito
@@ -141,16 +138,15 @@ export function mountCartPanel() {
       return;
     }
 
-    const checkoutBtn = e.target.closest('[data-action="checkout-demo"]');
+    const checkoutBtn = e.target.closest('[data-action="checkout-whatsapp"]');
     if (checkoutBtn) {
-      const notice = document.getElementById('checkoutNotice');
-      if (notice) {
-        notice.classList.remove('d-none');
-        checkoutBtn.textContent = 'Pedido confirmado ✓';
-        setTimeout(() => {
-          checkoutBtn.innerHTML = 'Continuar con la compra <span>↗</span>';
-        }, 2500);
+      const items = getCartItems();
+      if (items.length === 0) {
+        alert('Tu carrito está vacío. Añade un producto antes de pedir.');
+        return;
       }
+      const mensaje = construirMensajePedido(items, getCartTotal(), formatPrice);
+      abrirWhatsApp(mensaje);
       return;
     }
   });

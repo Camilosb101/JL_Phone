@@ -21,3 +21,15 @@ export const FUENTE_DE_DATOS = 'local'; // 'local' | 'api'
 //   'http://localhost:3000/api'   (mientras desarrollas en tu PC)
 //   'https://mi-tienda.com/api'   (cuando ya esté publicado en internet)
 export const API_URL = 'http://localhost:3000/api';
+
+// ============================================================
+//  WHATSAPP
+// ============================================================
+// Número de WhatsApp del negocio para recibir pedidos y consultas.
+// Formato internacional SIN espacios, SIN "+" y SIN guiones.
+// Ejemplo Colombia: 57 + número => '573001234567'
+//
+// MIENTRAS NO TENGAS EL NÚMERO: déjalo vacío (''). Los botones
+// mostrarán un aviso amable de "próximamente" en vez de romperse.
+// Cuando tengas el número, ponlo aquí y TODO queda conectado solo.
+export const WHATSAPP_NUMERO = '';

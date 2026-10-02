@@ -77,7 +77,7 @@ export async function renderProductDetailPage(rootElement, params) {
                       type="button"
                       data-color-image="${c.image}"
                       data-color-name="${c.name}"
-                      style="--swatch-color: ${c.hex};"
+                      style="--swatch-color: ${c.hex}; background-color: ${c.hex};"
                       title="${c.name}"
                       aria-label="Ver en color ${c.name}"
                     ></button>

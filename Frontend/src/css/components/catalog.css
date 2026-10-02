@@ -2,6 +2,10 @@
   background: linear-gradient(to bottom, #101319 0%, #101319 88%, rgba(16, 19, 25, 0.6) 96%, transparent 100%);
 }
 
+#catalogo {
+  padding-top: 2rem;
+}
+
 h2 {
   margin: 0;
   font-size: clamp(2.7rem, 5vw, 4.5rem);

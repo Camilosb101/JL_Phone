@@ -1,4 +1,7 @@
 import logoImage from '../../assets/images/image.png';
+import usadosIcon from '../../assets/images/usados-icon.png';
+import iphoneIcon from '../../assets/images/iphone-icon-blanco.png';
+import samsungIcon from '../../assets/images/sam-icon-azul.png';
 import { getCartCount } from '../services/cartService.js';
 import { eventBus } from '../core/EventBus.js';
 import { router } from '../core/Router.js';
@@ -6,8 +9,10 @@ import { router } from '../core/Router.js';
 let isHeaderEventsBound = false;
 
 export function renderHeader() {
+  const isUsedDevicesPage = window.location.hash.replace(/^#/, '') === '/usados';
+
   return `
-<header class="site-header">
+<header class="site-header${isUsedDevicesPage ? ' site-header--used-page' : ''}">
   <nav class="navbar" aria-label="Navegación principal">
     <div class="container position-relative d-flex justify-content-between align-items-center">
       <!-- Left side: Logo + Menú button -->
@@ -39,15 +44,15 @@ export function renderHeader() {
             <span>Recibe tu Cel por Parte de Pago</span>
           </button>
           <button class="quick-nav-item" type="button" data-menu-action="used-devices">
-            <span class="quick-nav-emoji">📦</span>
+            <img class="quick-nav-icon" src="${usadosIcon}" alt="" />
             <span>Equipos Usados / Seminuevos</span>
           </button>
           <button class="quick-nav-item" type="button" data-menu-action="catalog-apple">
-            <span class="quick-nav-emoji">📱</span>
+            <img class="quick-nav-icon quick-nav-icon--iphone" src="${iphoneIcon}" alt="" />
             <span>Catálogo iPhone</span>
           </button>
           <button class="quick-nav-item" type="button" data-menu-action="catalog-samsung">
-            <span class="quick-nav-emoji">📱</span>
+            <img class="quick-nav-icon" src="${samsungIcon}" alt="" />
             <span>Catálogo Samsung</span>
           </button>
         </div>
@@ -81,19 +86,19 @@ export function renderHeader() {
 
       <!-- Center navigation links (desktop) -->
       <ul class="navbar-nav d-none d-lg-flex flex-row gap-4 m-0">
-        <li class="nav-item"><a class="nav-link active" href="#catalogo" data-nav-filter="Apple">iPhone</a></li>
+        <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Apple">iPhone</a></li>
         <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Samsung">Samsung</a></li>
-        <li class="nav-item"><a class="nav-link" href="#/" data-scroll-target="experiencia">Plan Canje</a></li>
+        <li class="nav-item"><a class="nav-link" href="#/informacion">Plan Canje</a></li>
       </ul>
 
       <!-- Right actions: Search + Cart -->
-      <div class="navbar-actions d-flex align-items-center gap-2">
-        <div class="search-container d-flex align-items-center">
-          <input type="text" id="navbarSearchInput" class="search-input d-none" placeholder="Buscar modelo..." aria-label="Buscar productos" />
-          <button class="icon-button" type="button" data-action="toggle-search" aria-label="Buscar productos" title="Buscar">⌕</button>
+      <div class="navbar-actions d-flex align-items-center gap-3">
+        <div class="search-container d-none d-md-flex align-items-center">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="text" id="navbarSearchInput" class="search-input" placeholder="Buscar iPhone o Samsung..." aria-label="Buscar productos" />
         </div>
         <button class="cart-button" type="button" data-action="open-cart" aria-label="Abrir carrito">
-          Mi Lista <span class="cart-count">0</span>
+          <span class="cart-button__label">Mi Lista</span> <span class="cart-count">0</span>
         </button>
       </div>
     </div>
@@ -121,14 +126,26 @@ function closeQuickMenu() {
   if (backdrop) backdrop.classList.add('d-none');
 }
 
+function updateNavScrollState() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  const progress = Math.min(window.scrollY / 180, 1);
+  header.style.setProperty('--nav-scroll-progress', progress.toFixed(2));
+}
+
 export function mountHeader() {
   const countElement = document.querySelector('.cart-count');
   if (countElement) {
     countElement.textContent = getCartCount();
   }
 
+  updateNavScrollState();
+
   if (isHeaderEventsBound) return;
   isHeaderEventsBound = true;
+
+  window.addEventListener('scroll', updateNavScrollState, { passive: true });
 
   eventBus.on('cart:updated', ({ count }) => {
     const el = document.querySelector('.cart-count');
@@ -207,13 +224,7 @@ export function mountHeader() {
       }
 
       if (action === 'used-devices') {
-        if (window.location.hash !== '#/' && window.location.hash !== '') {
-          router.navigate('#/');
-        }
-        setTimeout(() => {
-          document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
-          showHeaderToast('📦 Equipos Seminuevos: 100% testeados, batería óptima y garantía JL');
-        }, 80);
+        router.navigate('/usados');
         return;
       }
 
