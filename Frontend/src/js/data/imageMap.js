@@ -9,15 +9,15 @@ const modulos = import.meta.glob(
 );
 
 const PREFIJO_BASE = '../../assets/images/';
-const PREFIJO_IPHONE = '../../assets/images/Imagen_Iphone/';
 const imagenes = {};
 
 for (const rutaCompleta in modulos) {
-  // Ruta relativa desde assets/images/ (ej. "Imagen_Samnsung/S24_Ultra/s24-ultra-alpha.png")
+  // Ruta relativa desde assets/images/ (ej. "catalogo/iphone/16_/iphone-16-negro.png")
   const rutaDesdeAssets = rutaCompleta.replace(PREFIJO_BASE, '');
   imagenes[rutaDesdeAssets] = modulos[rutaCompleta];
 
-  // Compatibilidad: también registrar sin prefijos como "Imagen_Iphone/", "Imagen_Samnsung/", "USAdos/"
+  // Compatibilidad: también registrar sin el primer segmento de carpeta
+  // (ej. "iphone/16_/..." además de "catalogo/iphone/16_/...").
   const parts = rutaDesdeAssets.split('/');
   if (parts.length > 1) {
     const sinPrefijo = parts.slice(1).join('/');
@@ -28,7 +28,7 @@ for (const rutaCompleta in modulos) {
 /**
  * Devuelve la URL final de una imagen local a partir de su ruta.
  *
- * @param {string} ruta - ej. 'Iphone_16_128GB_5G/iphone16128gb-5g-negro.png' o 'Imagen_Samnsung/...'
+ * @param {string} ruta - ej. 'iphone/16_/iphone-16-negro.png'
  * @returns {string} URL lista para usar en un <img src="...">
  */
 export function img(ruta) {

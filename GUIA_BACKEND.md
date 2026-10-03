@@ -105,6 +105,7 @@ Qué significa cada campo:
 | `model`          | Modelo (aparece encima del nombre en la tarjeta).            |
 | `name`           | Nombre que se ve en grande.                                  |
 | `price`          | Precio, solo el número (sin puntos ni símbolo `$`).          |
+| `pricesByStorage`| Opcional: precio por capacidad, o por capacidad y color si se guardan precios distintos por variante. |
 | `images`         | Lista de direcciones de imágenes. Se muestra la primera.     |
 | `colors`         | Lista de colores disponibles.                                |
 | `storage`        | Lista de capacidades (ej. `"128 GB"`).                       |
@@ -117,6 +118,10 @@ Qué significa cada campo:
 > Consejo: mantén los **mismos nombres de campos**. Si tu backend usa otros
 > nombres (por ejemplo `precio` en vez de `price`), la página no los entenderá.
 > Lo más fácil es que tu backend responda con estos mismos nombres.
+
+Para una tarifa igual en todos los colores: `"pricesByStorage": { "256 GB": 4180000 }`.
+Para precios distintos por color: `"pricesByStorage": { "256 GB": { "Azul": 4180000, "Naranja cósmico": 4230000, "Blanco": 4250000 } }`.
+Las capacidades o colores sin un valor numérico se muestran como precio no registrado y no se pueden agregar al carrito.
 
 ---
 

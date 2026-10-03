@@ -2,7 +2,6 @@ import logoImage from '../../assets/images/image.png';
 import usadosIcon from '../../assets/images/usados-icon.png';
 import iphoneIcon from '../../assets/images/iphone-icon-blanco.png';
 import samsungIcon from '../../assets/images/sam-icon-azul.png';
-import { getCartCount } from '../services/cartService.js';
 import { eventBus } from '../core/EventBus.js';
 import { router } from '../core/Router.js';
 
@@ -10,6 +9,8 @@ let isHeaderEventsBound = false;
 
 export function renderHeader() {
   const isUsedDevicesPage = window.location.hash.replace(/^#/, '') === '/usados';
+  const isInfoPage = window.location.hash.replace(/^#/, '') === '/informacion';
+  const isAboutPage = window.location.hash.replace(/^#/, '') === '/sobre-nosotros';
 
   return `
 <header class="site-header${isUsedDevicesPage ? ' site-header--used-page' : ''}">
@@ -39,10 +40,6 @@ export function renderHeader() {
         <div class="quick-nav-divider"></div>
 
         <div class="quick-nav-list">
-          <button class="quick-nav-item" type="button" data-menu-action="trade-in">
-            <span class="quick-nav-emoji">🔥</span>
-            <span>Recibe tu Cel por Parte de Pago</span>
-          </button>
           <button class="quick-nav-item" type="button" data-menu-action="used-devices">
             <img class="quick-nav-icon" src="${usadosIcon}" alt="" />
             <span>Equipos Usados / Seminuevos</span>
@@ -85,21 +82,20 @@ export function renderHeader() {
       <div id="quickNavBackdrop" class="quick-nav-backdrop d-none" data-action="close-menu"></div>
 
       <!-- Center navigation links (desktop) -->
-      <ul class="navbar-nav d-none d-lg-flex flex-row gap-4 m-0">
-        <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Apple">iPhone</a></li>
-        <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Samsung">Samsung</a></li>
-        <li class="nav-item"><a class="nav-link" href="#/informacion">Plan Canje</a></li>
-      </ul>
+      ${isInfoPage || isAboutPage ? '' : `
+        <ul class="navbar-nav d-none d-lg-flex flex-row gap-4 m-0">
+          <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Apple">iPhone</a></li>
+          <li class="nav-item"><a class="nav-link" href="#catalogo" data-nav-filter="Samsung">Samsung</a></li>
+          <li class="nav-item"><a class="nav-link" href="#/informacion">Plan Canje</a></li>
+        </ul>
+      `}
 
-      <!-- Right actions: Search + Cart -->
+      <!-- Right actions: Search -->
       <div class="navbar-actions d-flex align-items-center gap-3">
         <div class="search-container d-none d-md-flex align-items-center">
           <span class="search-icon" aria-hidden="true">⌕</span>
           <input type="text" id="navbarSearchInput" class="search-input" placeholder="Buscar iPhone o Samsung..." aria-label="Buscar productos" />
         </div>
-        <button class="cart-button" type="button" data-action="open-cart" aria-label="Abrir carrito">
-          <span class="cart-button__label">Mi Lista</span> <span class="cart-count">0</span>
-        </button>
       </div>
     </div>
   </nav>
@@ -135,22 +131,12 @@ function updateNavScrollState() {
 }
 
 export function mountHeader() {
-  const countElement = document.querySelector('.cart-count');
-  if (countElement) {
-    countElement.textContent = getCartCount();
-  }
-
   updateNavScrollState();
 
   if (isHeaderEventsBound) return;
   isHeaderEventsBound = true;
 
   window.addEventListener('scroll', updateNavScrollState, { passive: true });
-
-  eventBus.on('cart:updated', ({ count }) => {
-    const el = document.querySelector('.cart-count');
-    if (el) el.textContent = count;
-  });
 
   document.addEventListener('click', (e) => {
     const scrollTarget = e.target.closest('[data-scroll-target]');
@@ -212,23 +198,22 @@ export function mountHeader() {
         return;
       }
 
-      if (action === 'trade-in') {
-        if (window.location.hash !== '#/' && window.location.hash !== '') {
-          router.navigate('#/');
-        }
-        setTimeout(() => {
-          document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
-          showHeaderToast('🔥 Plan Retoma: Recibimos tu celular iPhone o Samsung como parte de pago');
-        }, 80);
-        return;
-      }
-
       if (action === 'used-devices') {
         router.navigate('/usados');
         return;
       }
 
-      if (action === 'warranty' || action === 'about' || action === 'location-social') {
+      if (action === 'warranty') {
+        router.navigate('/informacion');
+        return;
+      }
+
+      if (action === 'about') {
+        router.navigate('/sobre-nosotros');
+        return;
+      }
+
+      if (action === 'location-social') {
         if (window.location.hash !== '#/' && window.location.hash !== '') {
           router.navigate('#/');
         }

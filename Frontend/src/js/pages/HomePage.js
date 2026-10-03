@@ -3,7 +3,6 @@ import { renderHeroSection, mountHeroSection } from '../components/HeroSection.j
 import { renderCatalogSection, mountCatalogSection } from '../components/CatalogSection.js';
 import { renderExperienceSection, mountExperienceSection } from '../components/ExperienceSection.js';
 import { renderFooter } from '../components/Footer.js';
-import { renderCartPanel, mountCartPanel } from '../components/CartPanel.js';
 
 export function renderHomePage(rootElement) {
   rootElement.innerHTML = `
@@ -14,12 +13,10 @@ export function renderHomePage(rootElement) {
       ${renderExperienceSection()}
     </main>
     ${renderFooter()}
-    ${renderCartPanel()}
   `;
 
   mountHeader();
   mountHeroSection();
   mountCatalogSection();
   mountExperienceSection();
-  mountCartPanel();
 }

@@ -1,6 +1,5 @@
 import { getAllProducts } from '../services/productService.js';
 import { createProductCard } from './ProductCard.js';
-import { addToCart } from '../services/cartService.js';
 import { eventBus } from '../core/EventBus.js';
 import { router } from '../core/Router.js';
 
@@ -186,34 +185,11 @@ export async function mountCatalogSection() {
   });
 
   if (productGrid) {
+    // Tanto el botón "Ver más" como el clic en la tarjeta llevan al detalle.
     productGrid.addEventListener('click', (e) => {
-      // 1. Add to cart button
-      const addToCartBtn = e.target.closest('[data-action="add-to-cart"]');
-      if (addToCartBtn) {
-        e.stopPropagation();
-        const productCard = addToCartBtn.closest('[data-product-id]');
-        if (productCard) {
-          const productId = productCard.dataset.productId;
-          const product = allProducts.find(p => p.id === productId);
-          if (product) {
-            addToCart(product);
-            const originalText = addToCartBtn.innerHTML;
-            addToCartBtn.innerHTML = 'Añadido ✓';
-            setTimeout(() => {
-              addToCartBtn.innerHTML = originalText;
-            }, 1100);
-          }
-        }
-        return;
-      }
-
-      // 2. Click anywhere on card -> navigate to detail
       const productCard = e.target.closest('[data-product-id]');
-      if (productCard) {
-        const productId = productCard.dataset.productId;
-        if (productId) {
-          router.navigate(`/producto/${productId}`);
-        }
+      if (productCard?.dataset.productId) {
+        router.navigate(`/producto/${productCard.dataset.productId}`);
       }
     });
   }

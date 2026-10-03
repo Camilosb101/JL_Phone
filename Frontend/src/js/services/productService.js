@@ -58,3 +58,35 @@ export async function getProductById(id) {
   const producto = [...productosLocales, ...usedProducts].find((p) => p.id === id);
   return producto ?? null;
 }
+
+function getProductLine(product) {
+  const name = `${product.name ?? ''} ${product.model ?? ''}`.toLowerCase();
+
+  if (product.brand === 'Apple') {
+    if (/pro\s*max|promax/.test(name)) return 'iphone-pro-max';
+    if (/\bpro\b/.test(name)) return 'iphone-pro';
+    if (/\bair\b/.test(name)) return 'iphone-air';
+    return 'iphone';
+  }
+
+  if (product.brand === 'Samsung') {
+    if (/ultra/.test(name)) return 'galaxy-ultra';
+    if (/\bz\s*(flip|fold)/.test(name)) return 'galaxy-z';
+    if (/\ba\d+/.test(name)) return 'galaxy-a';
+    return 'galaxy';
+  }
+
+  return product.brand ?? '';
+}
+
+export async function getRelatedProducts(product, limit = 10) {
+  const source = product.isUsed ? usedProducts : await getAllProducts();
+  const sameBrand = source.filter((candidate) => (
+    candidate.id !== product.id && candidate.brand === product.brand
+  ));
+  const currentLine = getProductLine(product);
+  const sameLine = sameBrand.filter((candidate) => getProductLine(candidate) === currentLine);
+  const recommendations = [...sameLine, ...sameBrand.filter((candidate) => !sameLine.includes(candidate))];
+
+  return recommendations.slice(0, limit);
+}

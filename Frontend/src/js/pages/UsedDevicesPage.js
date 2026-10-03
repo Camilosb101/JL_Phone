@@ -1,8 +1,6 @@
 import { renderHeader, mountHeader } from '../components/Header.js';
 import { renderFooter } from '../components/Footer.js';
-import { renderCartPanel, mountCartPanel } from '../components/CartPanel.js';
 import { createProductCard } from '../components/ProductCard.js';
-import { addToCart } from '../services/cartService.js';
 import { usedProducts } from '../data/usedProducts.js';
 import { router } from '../core/Router.js';
 import appleBackgroundImage from '../../assets/images/image-removebg-preview.png';
@@ -51,28 +49,13 @@ export function renderUsedDevicesPage(rootElement) {
       </section>
     </main>
     ${renderFooter()}
-    ${renderCartPanel()}
   `;
 
   mountHeader();
-  mountCartPanel();
 
   const productGrid = document.getElementById('usedProductGrid');
+  // Tanto el botón "Ver más" como el clic en la tarjeta llevan al detalle.
   productGrid?.addEventListener('click', (event) => {
-    const addButton = event.target.closest('[data-action="add-to-cart"]');
-    if (addButton) {
-      event.stopPropagation();
-      const card = addButton.closest('[data-product-id]');
-      const product = usedProducts.find((item) => item.id === card?.dataset.productId);
-      if (product) {
-        addToCart(product);
-        const originalText = addButton.innerHTML;
-        addButton.innerHTML = 'Añadido ✓';
-        setTimeout(() => { addButton.innerHTML = originalText; }, 1100);
-      }
-      return;
-    }
-
     const card = event.target.closest('[data-product-id]');
     if (card?.dataset.productId) router.navigate(`/producto/${card.dataset.productId}`);
   });

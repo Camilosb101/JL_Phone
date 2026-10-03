@@ -7,9 +7,9 @@
 @import './layout/hero.css';
 @import './components/buttons.css';
 @import './components/product-card.css';
-@import './components/cart-panel.css';
 @import './components/catalog.css';
 @import './components/experience.css';
+@import './components/about.css';
 @import './components/used-catalog.css';
 @import './responsive.css';
 

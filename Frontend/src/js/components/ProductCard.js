@@ -1,6 +1,12 @@
 import { formatPrice } from '../utils/format.js';
 
 export function createProductCard(product) {
+  const displayStorage = product.storage?.find((storage) => {
+    const prices = product.pricesByStorage?.[storage];
+    return typeof prices === 'number'
+      || (prices && Object.values(prices).some((price) => typeof price === 'number'));
+  }) ?? product.storage[0];
+
   return `
     <article class="product-card h-100" data-product-id="${product.id}">
       <div class="product-card__image-wrap">
@@ -18,12 +24,12 @@ export function createProductCard(product) {
         </div>
         <p class="product-card__description">${product.description}</p>
         <div class="product-card__meta mt-auto">
-          <span>▱ ${product.storage[0]}</span>
+          <span>▱ ${displayStorage}</span>
           <span>● ${product.colors.join(', ')}</span>
           ${product.isUsed ? `<span>▣ ${product.specifications.bateria}</span>` : ''}
         </div>
-        <button class="btn btn-outline-light product-card__button mt-4" type="button" data-action="add-to-cart">
-          Añadir al carrito <span>＋</span>
+        <button class="btn btn-outline-light product-card__button mt-4" type="button" data-action="ver-mas">
+          Ver más <span>↗</span>
         </button>
       </div>
     </article>

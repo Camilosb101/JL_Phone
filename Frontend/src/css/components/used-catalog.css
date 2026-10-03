@@ -36,8 +36,14 @@
   .used-catalog-intro__grid {
     grid-template-columns: 1fr;
   }
+  /* En celular el icono aparece debajo del texto, centrado y a un tamaño
+     cómodo que se ajusta al ancho de la pantalla. */
   .used-catalog-intro__media {
-    display: none;
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+  .used-catalog-intro__media img {
+    max-width: 65vw;
   }
 }
 

@@ -1,3 +1,11 @@
+/* Evita el scroll horizontal (que la página "se mueva" a los lados en el celular)
+   cuando algún elemento se sale un poco del ancho de la pantalla. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .brand-background {
   position: fixed;
   z-index: 0;
@@ -46,4 +54,22 @@
   position: relative;
   z-index: 1;
   padding: 7rem 0;
+}
+
+@media (max-width: 575.98px) {
+  .brand-background {
+    inset: 0 0 auto;
+    height: 100vh;
+    height: 100svh;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .brand-background__apple,
+  .brand-background__samsung {
+    mix-blend-mode: normal;
+    filter: none;
+    transform: translate3d(0, -50%, 0);
+    backface-visibility: hidden;
+  }
 }
